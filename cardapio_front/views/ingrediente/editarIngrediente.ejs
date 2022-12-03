@@ -22,12 +22,12 @@
                 <input
                     type="hidden"
                     name="id" id="id"
-                    value="<%= ingrediente.id %>"/>
+                    value="<%= Ingrediente.id %>"/>
 
                 <input type="text" class="form-control" 
                         name="nome_ingrediente" id="nome_ingrediente"
                         placeholder="DIGITE UM INGREDIENTE"
-                        value="<%= ingrediente.nome_ingrediente %>">
+                        value="<%= Ingrediente.nome_ingrediente %>">
                 
                 <button class="btn btn-success mt-2">EDITAR</button>
             </form>
@@ -37,3 +37,13 @@
     </body>
 
 <%- include('../partials/footer.ejs')  %>
+
+<%
+ingrediente.forEach(Ingrediente=>{
+%>
+
+
+        <%= Ingrediente.nome_ingrediente %>
+  
+
+<% }) %>

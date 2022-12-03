@@ -21,7 +21,7 @@ app.get('/cadastrarIngrediente', (req, res)=>{
 //ROTA DE LISTAGEM DE INGREDIENTE
 app.get('/listagemIngrediente', (req, res)=>{
     
-    const urlListagemIngrediente = 'http://localhost:3000/listarIngrediente';
+    const urlListagemIngrediente = 'http://localhost:3001/listarIngrediente';
 
     /*
     CHAMADA PELO AXIOS:
@@ -44,10 +44,10 @@ app.get('/listagemIngrediente', (req, res)=>{
         
         //RECEBE O ID DE CATEGORIA QUE VAI SER EDITADO
         let {id} = req.params;
-        // console.log(id);
+         console.log(id);
 
         //CHAMADA DO AXIOS PARA A API:
-        const urlListagemIngrediente = `http://localhost:3000/listarIngrediente/${id}`;
+        const urlListagemIngrediente = `http://localhost:3001/listarIngrediente/${id}`;
         
         axios.get(urlListagemIngrediente)
         .then(
@@ -63,12 +63,12 @@ app.get('/listagemIngrediente', (req, res)=>{
     //ROTA DE EDIÇÃO
     app.post('/alterarIngrediente', (req, res)=>{
 
-        const urlAlterarIngrediente = 'http://localhost:3000/alterarIngrediente';
+        const urlAlterarIngrediente = 'http://localhost:3001/inserirIngrediente';
         console.log(req.body);
 
         axios.put(urlAlterarIngrediente, req.body)
         .then(
-            res.send('ALTERADO!!!')
+            res.send('Cadastrado!!!')
         )
 
     });
