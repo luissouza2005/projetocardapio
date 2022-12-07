@@ -11,7 +11,9 @@ const ingrediente = connection.define(
     }
 );
 
-//ingrediente.sync({force:true});
+ingrediente.sync({force:true});
 
 module.exports = ingrediente;
+
+
 
