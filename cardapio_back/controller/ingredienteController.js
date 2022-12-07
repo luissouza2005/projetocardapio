@@ -27,9 +27,7 @@ router.get("/listarIngrediente", (req, res) =>{
     router.get('/listarIngrediente/:id',(req, res)=>{
 
         let{id}=req.params;
-        let {nome_ingrediente} = req.params;
-    
-        ingrediente.findByPk(nome_ingrediente)
+        ingrediente.findByPk(id)
             .then(
                 (ingrediente)=>{
                     res.status(200).json(ingrediente);
@@ -76,11 +74,12 @@ router.get("/listarIngrediente", (req, res) =>{
     router.put('/alterarIngrediente', (req, res)=>{
 
        
-        let {nome_ingrediente} = req.body;
+        let {id, nome_ingrediente} = req.body;
     
         //ALTERANDO OS DADOS:
         ingrediente.update(
-            {where:{nome_ingrediente}}
+            {nome_ingrediente},
+            {where:{id}}
         ).then( ()=>{
     
             return res.status(200).json({
@@ -106,13 +105,13 @@ router.get("/listarIngrediente", (req, res) =>{
 
     
        
- router.delete('/deletarIngrediente', (req, res)=>{
+ router.delete('/deletarIngrediente/:id', (req, res)=>{
 
     
-        let {nome_ingrediente} = req.params;
+        let {id} = req.params;
     
         ingrediente.destroy(
-            {where: {nome_ingrediente}}
+            {where: {id}}
         ).then( ()=>{
     
             return res.status(200).json({

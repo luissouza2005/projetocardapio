@@ -63,15 +63,50 @@ app.get('/listagemIngrediente', (req, res)=>{
     //ROTA DE EDIÇÃO
     app.post('/alterarIngrediente', (req, res)=>{
 
-        const urlAlterarIngrediente = 'http://localhost:3001/inserirIngrediente';
+        const urlAlterarIngrediente = 'http://localhost:3001/alterarIngrediente';
         console.log(req.body);
 
         axios.put(urlAlterarIngrediente, req.body)
         .then(
-            res.send('Cadastrado!!!')
+            axios.get("http://localhost:3001/listarIngrediente").then((response) => {
+			let ingrediente = response.data;
+			console.log("RESPONSE: " + response.data);
+			res.render("ingrediente/listagemIngrediente", { ingrediente });
+		})
         )
-
     });
+    
+    // Renderização Cadastro de ingrediente
+    app.post("/cadastroIngrediente", (req, res)=>{
+        const urlcadastrarIngrediente = "http://localhost:3001/inserirIngrediente";
+        console.log(req.body);
+        axios.post(urlcadastrarIngrediente, req.body)
+        .then((response)=>{
+            axios.get("http://localhost:3001/listarIngrediente").then((response)=>{
+                let ingrediente = response.data;
+               // console.log("Response:" + response.data);
+                res.render("ingrediente/listagemIngrediente", {ingrediente});
+            });
+        });
+    });
+
+    // delete
+    app.get("/delete/:id", (req, res) => {
+	//RECEBE O ID DE CATEGORIA QUE VAI SER EDITADO
+	let { id } = req.params;// mesmo nome model
+	// console.log(id);
+
+	//CHAMADA DO AXIOS PARA A API:
+	const urlDeleteCarro = `http://localhost:3001/deletarIngrediente/${id}`;
+
+	axios.delete(urlDeleteCarro).then((response) => {
+		axios.get("http://localhost:3001/listarIngrediente").then((response) => {
+			let ingrediente = response.data;
+			console.log("RESPONSE: " + response.data);
+			res.render("ingrediente/listagemIngrediente", { ingrediente });
+		});
+	});
+});
 
 app.listen(3000, ()=>{
     console.log('SERVIDOR RODANDO EM: http://localhost:3000');

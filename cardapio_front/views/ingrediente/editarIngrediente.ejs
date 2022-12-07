@@ -1,6 +1,6 @@
 <%- include('../partials/header.ejs')  %>
 
-<title>EDIÇÃO DE INGREDIENTE - LIBRI</title>
+<title>EDIÇÃO DE INGREDIENTE</title>
 
 </head>
 
@@ -22,12 +22,12 @@
                 <input
                     type="hidden"
                     name="id" id="id"
-                    value="<%= Ingrediente.id %>"/>
+                    value="<%= ingrediente.id %>"/>
 
                 <input type="text" class="form-control" 
                         name="nome_ingrediente" id="nome_ingrediente"
                         placeholder="DIGITE UM INGREDIENTE"
-                        value="<%= Ingrediente.nome_ingrediente %>">
+                        value="<%= ingrediente.nome_ingrediente %>">
                 
                 <button class="btn btn-success mt-2">EDITAR</button>
             </form>
@@ -38,12 +38,3 @@
 
 <%- include('../partials/footer.ejs')  %>
 
-<%
-ingrediente.forEach(Ingrediente=>{
-%>
-
-
-        <%= Ingrediente.nome_ingrediente %>
-  
-
-<% }) %>
